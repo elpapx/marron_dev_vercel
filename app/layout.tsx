@@ -1,12 +1,6 @@
 import type React from "react"
-import type { Metadata } from "next"
 import "./globals.css"
-
-export const metadata: Metadata = {
-  title: "MARRÓN.dev - Portfolio",
-  description: "Multi-talented development team specializing in web development, design, and digital solutions",
-  generator: "v0.dev",
-}
+import ClientLayout from "./ClientLayout"
 
 export default function RootLayout({
   children,
@@ -15,7 +9,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <title>MARRÓN.dev - Portfolio</title>
+        <meta
+          name="description"
+          content="Multi-talented development team specializing in web development, design, and digital solutions"
+        />
+      </head>
+      <body className="overflow-hidden">
+        <ClientLayout>{children}</ClientLayout>
+      </body>
     </html>
   )
 }
+
+export const metadata = {
+      generator: 'v0.dev'
+    };

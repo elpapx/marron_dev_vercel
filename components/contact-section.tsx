@@ -1,18 +1,18 @@
 import { Header } from "@/components/header"
 
-export default function ContactPage() {
+export function ContactSection() {
   return (
-    <div className="min-h-screen bg-amber-900">
-      <Header />
+    <div className="w-screen h-screen bg-amber-900 flex-shrink-0">
+      <Header currentSection="contact" sectionTitle="(contact)" />
 
-      <main className="container mx-auto px-8 py-12">
+      <main className="container mx-auto px-8 py-12 h-full overflow-y-auto bg-amber-900">
         <div className="flex items-center justify-center min-h-[70vh]">
           <div className="text-center text-amber-100 max-w-2xl">
-            <h1 className="text-5xl font-light mb-12">(contact)</h1>
-
             <div className="space-y-8">
               <div className="space-y-4 text-xl">
-                <p className="hover:text-white transition-colors cursor-pointer">hello@marron.dev</p>
+                <a href="mailto:hello@marron.dev" className="block hover:text-white transition-colors cursor-pointer">
+                  hello@marron.dev
+                </a>
                 <p className="hover:text-white transition-colors cursor-pointer">+1 (555) 123-4567</p>
               </div>
 
