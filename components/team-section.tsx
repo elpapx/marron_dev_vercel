@@ -7,8 +7,8 @@ export function TeamSection() {
       <div className="h-full">
         <Header currentSection="team" sectionTitle="(multi-talented team)" />
 
-        <main className="container mx-auto px-8 py-12 h-full overflow-y-auto bg-amber-900">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto mt-16">
+        <main className="container mx-auto px-4 md:px-8 py-6 md:py-12 h-full overflow-y-auto bg-amber-900">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto mt-8 md:mt-16">
             <TeamMember
               name="Cristian Madalengoitia"
               role="Design director, brand consultant and programmer;"

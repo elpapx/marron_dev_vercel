@@ -8,7 +8,7 @@ interface TeamMemberProps {
 export function TeamMember({ name, role, linkedIn, behance }: TeamMemberProps) {
   return (
     <div className="text-amber-100 space-y-2">
-      <div className="text-lg">
+      <div className="text-base md:text-lg">
         <span className="font-medium">{name}</span>
         <span className="text-amber-300"> {`{`}</span>
       </div>

@@ -2,6 +2,9 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
+import { MobileWorkSection } from "@/components/mobile-work-section"
+import { MobileTeamSection } from "@/components/mobile-team-section"
+import { MobileContactSection } from "@/components/mobile-contact-section"
 
 export default function ClientLayout({
   children,
@@ -9,6 +12,17 @@ export default function ClientLayout({
   children: React.ReactNode
 }>) {
   const [currentSection, setCurrentSection] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   useEffect(() => {
     // Set initial section based on current path
@@ -20,14 +34,18 @@ export default function ClientLayout({
 
   const navigateToSection = (sectionIndex: number) => {
     setCurrentSection(sectionIndex)
-    const container = document.getElementById("scroll-container")
-    if (container) {
-      container.style.transform = `translateX(-${sectionIndex * 100}vw)`
+    if (!isMobile) {
+      const container = document.getElementById("scroll-container")
+      if (container) {
+        container.style.transform = `translateX(-${sectionIndex * 100}vw)`
+      }
     }
   }
 
-  // Keyboard navigation
+  // Keyboard navigation for desktop only
   useEffect(() => {
+    if (isMobile) return
+
     const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
         case "ArrowRight":
@@ -49,8 +67,20 @@ export default function ClientLayout({
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [currentSection])
+  }, [currentSection, isMobile])
 
+  // Mobile version - Show different sections based on currentSection
+  if (isMobile) {
+    return (
+      <div className="w-screen h-screen overflow-hidden bg-amber-900">
+        {currentSection === 0 && <MobileWorkSection onNavigate={navigateToSection} />}
+        {currentSection === 1 && <MobileTeamSection onNavigate={navigateToSection} />}
+        {currentSection === 2 && <MobileContactSection onNavigate={navigateToSection} />}
+      </div>
+    )
+  }
+
+  // Desktop version - Horizontal scroll layout
   return (
     <div id="scroll-container" className="flex w-[300vw] h-screen transition-transform duration-1000 ease-out">
       {children}
